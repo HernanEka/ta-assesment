@@ -15,4 +15,5 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/server', [ServerController::class, 'index']);
     Route::get('/server/add', [ServerController::class, 'addPage']);
+    Route::post('/server/tambah', [ServerController::class, 'tambahServer']);
 });
