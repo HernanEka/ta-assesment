@@ -31,13 +31,16 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mb-2 ms-auto mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/">Dashboard</a>
+                            <a class="nav-link @if (request()->is('/')) active @endif" aria-current="page"
+                                href="/">Dashboard</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/server">Server</a>
+                            <a class="nav-link @if (request()->is('*server*')) active @endif"
+                                href="/server">Server</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Ip Address</a>
+                            <a class="nav-link @if (request()->is('*ip*')) active @endif" href="#">Ip
+                                Address</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
