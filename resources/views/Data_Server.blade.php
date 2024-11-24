@@ -43,7 +43,7 @@
                     <td>{{ $data->ips_count }}</td>
                     <td>
                         <a href="/server/detail/{{ $data->slug }}" class="btn btn-primary">Detail</a>
-                        <a href="#" class="btn btn-warning">Edit</a>
+                        <a href="/server/edit/{{ $data->slug }}" class="btn btn-warning">Edit</a>
                         <a href="#" class="btn btn-danger">Delete</a>
                     </td>
                 </tr>
