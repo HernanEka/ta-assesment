@@ -31,18 +31,23 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Server 1</td>
-                <td>Apache, PHP 8</td>
-                <td>123456789 - Hernanda</td>
-                <td>14</td>
-                <td>
-                    <a href="#" class="btn btn-primary">Detail</a>
-                    <a href="#" class="btn btn-warning">Edit</a>
-                    <a href="#" class="btn btn-danger">Delete</a>
-                </td>
-            </tr>
+            @php
+                $i = 1
+            @endphp
+            @foreach ($server as $data)
+                <tr>
+                    <th scope="row">{{ $i++ }}</th>
+                    <td>{{ $data->hostname }}</td>
+                    <td>{{ $data->services }}</td>
+                    <td>{{ $data->picnik }} - {{ $data->picname }}</td>
+                    <td>{{ $data->ips_count }}</td>
+                    <td>
+                        <a href="/server/detail/{{ $data->slug }}" class="btn btn-primary">Detail</a>
+                        <a href="#" class="btn btn-warning">Edit</a>
+                        <a href="#" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            @endforeach
         </tbody>
     </table>
 @endsection

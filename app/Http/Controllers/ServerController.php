@@ -4,25 +4,28 @@ namespace App\Http\Controllers;
 
 use App\Models\Ip;
 use App\Models\Server;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class ServerController extends Controller
 {
-    public function index(){
+    public function index()
+    {
 
+        $server = Server::withCount('ips')->get();
         $title = "Data Server";
-        return view("Data_Server", compact('title'));
-
+        return view("Data_Server", compact('title', 'server'));
     }
 
-    public function addPage(){
+    public function addPage()
+    {
 
         $title = "Tambah Server";
         return view('Add_Server', compact('title'));
-
     }
 
-    public function tambahServer(Request $request){
+    public function tambahServer(Request $request)
+    {
 
         $request->validate([
 
@@ -36,9 +39,12 @@ class ServerController extends Controller
         $server = new Server();
 
         $server->hostname = $request->hostname;
+        $server->slug = Str::slug('Server') . "-" . Str::random(8);
         $server->picnik = $request->picnik;
         $server->picname = $request->picname;
-        $server->services = implode(", ", $request->service);
+        if ($request->services) {
+            $server->services = implode(", ", $request->service);
+        }
 
         $server->save();
 
@@ -49,6 +55,16 @@ class ServerController extends Controller
         $ip->save();
 
         return redirect('/server');
+    }
 
+    public function detail($slug)
+    {
+
+        $server = Server::where('slug', '=', $slug)->first();
+        $ip_server = Ip::where('server_id', '=', $server->id)->where('tipe', '=', 'server')->first();
+        $ip_host = Ip::where('server_id', '=', $server->id)->where('tipe', '=', 'user')->get();
+        $title = 'Detail Server';
+        $services = explode(", ", $server->services);
+        return view('Detail_Server', compact('server', 'ip_server', 'ip_host', 'title', 'services'));
     }
 }

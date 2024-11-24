@@ -55,8 +55,16 @@
 
         <div class="container">
 
-            <div class="display-1 fw-bold m-5 text-center" style="color: #ed1e28">
-                {{ $title }}
+
+            <div class="my-5">
+                @if (request()->is('server/*'))
+                    <a href="/server" class="btn btn-outline-dark">
+                        <i class="bi bi-box-arrow-left"></i> Back
+                    </a>
+                @endif
+                <div class="display-1 fw-bold text-center" style="color: #ed1e28">
+                    {{ $title }}
+                </div>
             </div>
             <hr>
             @yield('content')

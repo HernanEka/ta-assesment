@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('servers', function (Blueprint $table) {
             $table->id();
             $table->string('hostname');
+            $table->string('slug')->unique();
             $table->string('picnik');
             $table->string('picname');
-            $table->string('services');
+            $table->string('services')->nullable();
             $table->timestamps();
         });
     }
