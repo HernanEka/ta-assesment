@@ -120,4 +120,14 @@ class ServerController extends Controller
 
         return redirect('/server');
     }
+
+    public function delete($slug){
+
+        $server = Server::where('slug', '=', $slug)->first();
+
+        $server->delete();
+
+        return redirect()->back();
+
+    }
 }

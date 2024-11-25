@@ -19,4 +19,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/server/detail/{slug}', [ServerController::class, 'detail']);
     Route::get('/server/edit/{slug}', [ServerController::class, 'edit']);
     Route::post('/server/update/{slug}', [ServerController::class, 'update']);
+    Route::get('/server/delete/{slug}', [ServerController::class, 'delete']);
 });
