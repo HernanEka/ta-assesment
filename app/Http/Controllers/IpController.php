@@ -35,10 +35,40 @@ class IpController extends Controller
 
         $ip = new Ip();
         $ip->ip_address = $request->ip;
-        $ip->slug = Str::slug('Server') . "-" . Str::random(8);
+        $ip->slug = Str::slug('ip') . "-" . Str::random(8);
         $ip->server_id = $request->server_id;
         $ip->save();
 
         return redirect('/ip');
+    }
+
+    public function delete($slug){
+
+        $ip = IP::where('slug', '=', $slug)->first();
+
+        $ip->delete();
+
+        return redirect()->back();
+
+    }
+
+    public function edit($slug){
+        $title = 'Edit IP Address';
+        $server = Server::all();
+        $ip = IP::where('slug', '=', $slug)->first();
+        return view('Edit_IP_Address', compact('title', 'server','ip'));
+    }
+
+    public function update(Request $request, $slug){
+
+        $ip = IP::where('slug', '=', $slug)->first();
+
+        $ip->ip_address = $request->ip;
+        $ip->server_id = $request->server_id;
+
+        $ip->save();
+
+        return redirect('/ip');
+
     }
 }

@@ -13,6 +13,7 @@ Route::get('/logout', [UserController::class, 'logout']);
 Route::middleware('auth')->group(function () {
 
     Route::get('/', [DashboardController::class, 'index']);
+    Route::get('/back', [DashboardController::class, 'back']);
 
     Route::get('/server', [ServerController::class, 'index']);
     Route::get('/server/add', [ServerController::class, 'addPage']);
@@ -25,4 +26,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/ip', [IpController::class, 'index']);
     Route::get('/ip/add', [IpController::class, 'addPage']);
     Route::post('/ip/tambah', [IpController::class, 'tambah']);
+    Route::get('/ip/edit/{slug}', [IpController::class, 'edit']);
+    Route::post('/ip/update/{slug}', [IpController::class, 'update']);
+    Route::get('/ip/delete/{slug}', [IpController::class, 'delete']);
 });

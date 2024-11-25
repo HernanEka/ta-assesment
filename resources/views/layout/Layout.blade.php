@@ -65,9 +65,21 @@
                         <i class="bi bi-box-arrow-left"></i> Back
                     </a>
                 @endif
+
+                @if (request()->is('ip/*'))
+                    <a href="/server" class="btn btn-outline-dark">
+                        <i class="bi bi-box-arrow-left"></i> Back
+                    </a>
+                @endif
                 <div class="display-1 fw-bold text-center" style="color: #ed1e28">
                     {{ $title }}
                 </div>
+
+                @if (request()->is('server/detail/*'))
+                    <div class="text-end">
+                        <a href="/server/edit/{{ $server->slug }}" class="btn btn-warning">Edit</a>
+                    </div>
+                @endif
             </div>
             <hr>
             @yield('content')
