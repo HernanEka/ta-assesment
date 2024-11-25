@@ -39,7 +39,7 @@
                                 href="/server">Server</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link @if (request()->is('*ip*')) active @endif" href="#">Ip
+                            <a class="nav-link @if (request()->is('*ip*')) active @endif" href="/ip">Ip
                                 Address</a>
                         </li>
                         <li class="nav-item dropdown">

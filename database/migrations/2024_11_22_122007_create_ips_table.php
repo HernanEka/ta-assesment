@@ -16,8 +16,6 @@ return new class extends Migration
             $table->string('ip_address', 15)->unique();
             $table->string('tipe')->default('user');
             $table->foreignId('server_id')->constrained()->onDelete('cascade');
-            // $table->foreignId('added_by')->constrained('users');
-            // $table->foreignId('updated_by')->nullable()->constrained('users');
             $table->timestamps();
         });
     }

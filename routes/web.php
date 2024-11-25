@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\IpController;
 use App\Http\Controllers\ServerController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -20,4 +21,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/server/edit/{slug}', [ServerController::class, 'edit']);
     Route::post('/server/update/{slug}', [ServerController::class, 'update']);
     Route::get('/server/delete/{slug}', [ServerController::class, 'delete']);
+
+    Route::get('/ip', [IpController::class, 'index']);
+    Route::get('/ip/add', [IpController::class, 'addPage']);
+    Route::post('/ip/tambah', [IpController::class, 'tambah']);
 });
