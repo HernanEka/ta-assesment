@@ -14,8 +14,16 @@
                             Server Hostname
                         </label>
                     </div>
-                    <div class="col d-flex gap-2 align">
-                        :<input type="text" name="hostname" id="hostname" class="form-control">
+                    <div class="col">
+                        <div class="d-flex gap-2">
+                            :<input type="text" name="hostname" id="hostname"
+                                class="form-control @error('hostname') is-invalid @enderror">
+                        </div>
+                        @error('hostname')
+                            <div class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -24,8 +32,15 @@
                             Person In Charge NIK
                         </label>
                     </div>
-                    <div class="col d-flex gap-2 align">
-                        :<input type="text" name="picnik" id="picnik" class="form-control">
+                    <div class="col">
+                        <div class="d-flex gap-2">
+                            :<input type="text" name="picnik" id="picnik" class="form-control @error('picnik') is-invalid @enderror">
+                        </div>
+                        @error('picnik')
+                            <div class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -34,8 +49,15 @@
                             Person In Charge Name
                         </label>
                     </div>
-                    <div class="col d-flex gap-2 align">
-                        :<input type="text" name="picname" id="picname" class="form-control">
+                    <div class="col">
+                        <div class="d-flex gap-2">
+                            :<input type="text" name="picname" id="picname" class="form-control @error('picname') is-invalid @enderror">
+                        </div>
+                        @error('picname')
+                            <div class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -44,8 +66,16 @@
                             IP Address Server
                         </label>
                     </div>
-                    <div class="col d-flex gap-2 align">
-                        :<input type="text" name="ip" id="ip" class="form-control">
+                    <div class="col">
+                        <div class="d-flex gap-2">
+                            :<input type="text" name="ip" id="ip"
+                                class="form-control @error('ip') is-invalid @enderror">
+                        </div>
+                        @error('ip')
+                            <div class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                 </div>
             </div>

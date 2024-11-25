@@ -68,7 +68,8 @@ class ServerController extends Controller
         return view('Detail_Server', compact('server', 'ip_server', 'ip_host', 'title', 'services'));
     }
 
-    public function edit($slug){
+    public function edit($slug)
+    {
 
         $server = Server::where('slug', '=', $slug)->first();
         $ip_server = Ip::where('server_id', '=', $server->id)->where('tipe', '=', 'server')->first();
@@ -79,30 +80,34 @@ class ServerController extends Controller
         return view('Edit_Server', compact('server', 'ip_server', 'title', 'services'));
     }
 
-    public function update(Request $request, $slug){
+    public function update(Request $request, $slug)
+    {
+        $server = Server::where('slug', '=', $slug)->first();
+        $ip = Ip::where('server_id', '=', $server->id)->where('tipe', '=', 'server')->first();
 
         $request->validate([
 
             'hostname' => 'required|min:4',
             'picnik' => 'required|numeric',
             'picname' => 'required|string',
-            'ip' => 'required|ipv4|unique:ip,ip_address'
+            'ip' => 'required|ipv4|unique:ips,ip_address,'.$ip->id
 
         ]);
 
-        $server = Server::where('slug', '=', $slug)->first();
         $server->hostname = $request->hostname;
         $server->slug = Str::slug('Server') . "-" . Str::random(8);
         $server->picnik = $request->picnik;
         $server->picname = $request->picname;
         if ($request->service) {
             $server->services = implode(", ", $request->service);
+        }else{
+            $server->services = null;
         }
-
         $server->save();
 
-        $ip = Ip::where('server_id', '=', $server->id)->where('tipe', '=', 'server')->first();
-        $ip->ip_address = $request->ip;
+        if ($ip->ip_address != $request->ip) {
+            $ip->ip_address = $request->ip;
+        }
         $ip->save();
 
         return redirect('/server');

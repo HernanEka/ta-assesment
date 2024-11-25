@@ -15,7 +15,8 @@
                         </label>
                     </div>
                     <div class="col d-flex gap-2 align">
-                        :<input type="text" name="hostname" id="hostname" class="form-control" value="{{ $server->hostname }}">
+                        :<input type="text" name="hostname" id="hostname" class="form-control"
+                            value="{{ $server->hostname }}">
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -25,7 +26,8 @@
                         </label>
                     </div>
                     <div class="col d-flex gap-2 align">
-                        :<input type="text" name="picnik" id="picnik" class="form-control" value="{{ $server->picnik }}">
+                        :<input type="text" name="picnik" id="picnik" class="form-control"
+                            value="{{ $server->picnik }}">
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -35,7 +37,8 @@
                         </label>
                     </div>
                     <div class="col d-flex gap-2 align">
-                        :<input type="text" name="picname" id="picname" class="form-control" value="{{ $server->picname }}">
+                        :<input type="text" name="picname" id="picname" class="form-control"
+                            value="{{ $server->picname }}">
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -45,9 +48,16 @@
                         </label>
                     </div>
                     <div class="col d-flex gap-2 align">
-                        :<input type="text" name="ip" id="ip" class="form-control" value="{{ $ip_server->ip_address }}">
+                        :<input type="text" name="ip" id="ip" class="form-control"
+                            value="{{ $ip_server->ip_address }}">
                     </div>
                 </div>
+
+                @error('ip')
+                    <div class="invalid-feedback d-block">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
         </div>
 
@@ -60,7 +70,7 @@
             </div>
             <div id="service-container">
 
-                @if (!$services)
+                @if (count($services))
                     @foreach ($services as $data)
                         <div class="d-flex mb-3">
                             <input type="text" name="service[]" class="form-control" value="{{ $data }}">
@@ -109,18 +119,6 @@
 
             container.appendChild(kotak);
         }
-
-        // const services = @json($services)
-
-        // var cleanedServices = services.filter(function(service) {
-        //     return service.trim() !== "";
-        // });
-
-        // if (cleanedServices.length === 0) {
-        //     document.addEventListener('DOMContentLoaded', () => {
-        //         tambahService();
-        //     });
-        // }
 
         function deleteService(button) {
             var div = button.closest('.d-flex');
