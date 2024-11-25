@@ -9,23 +9,40 @@ use Illuminate\Http\Request;
 
 class IpController extends Controller
 {
-    public function index() {
-
+    public function index()
+    {
         $title = 'Data Ip Address';
+
+        if (request()->query('search')) {
+
+            $search = request()->query('search');
+
+            $server = Server::where('hostname', 'like', '%' . $search . '%')->first();
+
+            if ($server != null) {
+                $ip = IP::where('ip_address', 'like', '%' . $search . '%')->orWhere('server_id', '=', $server->id)->where('tipe', '=', 'user')->get();
+            }
+            else{
+                $ip = IP::where('ip_address', 'like', '%' . $search . '%')->where('tipe', '=', 'user')->get();
+            }
+
+            return view('Data_IP_Address', compact('title', 'ip','search'));
+        }
+
         $ip = IP::where('tipe', '=', 'user')->get();
         return view('Data_IP_Address', compact('title', 'ip'));
-
     }
 
-    public function addPage(){
+    public function addPage()
+    {
 
         $title = 'Input IP Address';
         $server = Server::all();
         return view('Add_IP_Address', compact('title', 'server'));
-
     }
 
-    public function tambah(Request $request) {
+    public function tambah(Request $request)
+    {
 
 
         $request->validate([
@@ -42,24 +59,26 @@ class IpController extends Controller
         return redirect('/ip');
     }
 
-    public function delete($slug){
+    public function delete($slug)
+    {
 
         $ip = IP::where('slug', '=', $slug)->first();
 
         $ip->delete();
 
         return redirect()->back();
-
     }
 
-    public function edit($slug){
+    public function edit($slug)
+    {
         $title = 'Edit IP Address';
         $server = Server::all();
         $ip = IP::where('slug', '=', $slug)->first();
-        return view('Edit_IP_Address', compact('title', 'server','ip'));
+        return view('Edit_IP_Address', compact('title', 'server', 'ip'));
     }
 
-    public function update(Request $request, $slug){
+    public function update(Request $request, $slug)
+    {
 
         $ip = IP::where('slug', '=', $slug)->first();
 
@@ -69,6 +88,5 @@ class IpController extends Controller
         $ip->save();
 
         return redirect('/ip');
-
     }
 }
