@@ -11,6 +11,14 @@ class ServerController extends Controller
 {
     public function index()
     {
+        if (request()->query('search') != null) {
+            $search = request()->query('search');
+
+            $server = Server::withCount('ips')->where('hostname', 'like', '%' . $search . '%')->orWhere('picnik', 'like', '%' . $search . '%')->orWhere('picname', 'like', '%' . $search . '%')->orWhere('services', 'like', '%' . $search . '%')->get();
+
+            $title = 'Data Server';
+            return view('Data_Server', compact('server', 'search', 'title'));
+        }
 
         $server = Server::withCount('ips')->get();
         $title = "Data Server";
@@ -90,7 +98,7 @@ class ServerController extends Controller
             'hostname' => 'required|min:4',
             'picnik' => 'required|numeric',
             'picname' => 'required|string',
-            'ip' => 'required|ipv4|unique:ips,ip_address,'.$ip->id
+            'ip' => 'required|ipv4|unique:ips,ip_address,' . $ip->id
 
         ]);
 
@@ -100,7 +108,7 @@ class ServerController extends Controller
         $server->picname = $request->picname;
         if ($request->service) {
             $server->services = implode(", ", $request->service);
-        }else{
+        } else {
             $server->services = null;
         }
         $server->save();

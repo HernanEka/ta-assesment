@@ -6,10 +6,10 @@
             <a href="/server/add" class="btn btn-primary">+ Tambah Data</a>
         </div>
         <div class="col ">
-            <form action="" method="GET">
+            <form action="/server" method="GET">
                 <div class="row g-3 justify-content-end">
                     <div class="col-auto">
-                        <input type="text" name="search" class="form-control" placeholder="Search">
+                        <input type="text" name="search" class="form-control" placeholder="Search" @if(isset($search)) value=" {{ $search }}" @endif>
                     </div>
                     <div class="col-auto">
                         <button type="submit" class="btn btn-success">Search</button>
