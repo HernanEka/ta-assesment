@@ -59,6 +59,7 @@ class ServerController extends Controller
         $ip = new Ip();
         $ip->ip_address = $request->ip;
         $ip->tipe = 'Server';
+        $ip->slug = Str::slug('IP') . "-" . Str::random(8);
         $ip->server_id = $server->id;
         $ip->save();
 

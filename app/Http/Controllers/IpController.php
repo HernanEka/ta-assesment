@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Ip;
 use App\Models\Server;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class IpController extends Controller
@@ -11,7 +12,8 @@ class IpController extends Controller
     public function index() {
 
         $title = 'Data Ip Address';
-        return view('Data_IP_Address', compact('title'));
+        $ip = IP::where('tipe', '=', 'user')->get();
+        return view('Data_IP_Address', compact('title', 'ip'));
 
     }
 
@@ -33,6 +35,7 @@ class IpController extends Controller
 
         $ip = new Ip();
         $ip->ip_address = $request->ip;
+        $ip->slug = Str::slug('Server') . "-" . Str::random(8);
         $ip->server_id = $request->server_id;
         $ip->save();
 

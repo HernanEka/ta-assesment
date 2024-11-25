@@ -30,19 +30,17 @@
             </tr>
         </thead>
         <tbody>
-            {{-- @php
+            @php
                 $i = 1;
             @endphp
-            @foreach ($server as $data)
+            @foreach ($ip as $data)
                 <tr>
                     <th scope="row">{{ $i++ }}</th>
-                    <td>{{ $data->hostname }}</td>
-                    <td>{{ $data->services }}</td>
-                    <td>{{ $data->picnik }} - {{ $data->picname }}</td>
-                    <td>{{ $data->ips_count }}</td>
+                    <td>{{ $data->ip_address }}</td>
+                    <td>{{ $data->server->hostname }}</td>
                     <td>
-                        <a href="/server/detail/{{ $data->slug }}" class="btn btn-primary">Detail</a>
-                        <a href="/server/edit/{{ $data->slug }}" class="btn btn-warning">Edit</a>
+                        <a href="/server/detail/{{ $data->server->slug }}" class="btn btn-primary">Detail</a>
+                        <a href="/ip/edit/{{ $data->slug }}" class="btn btn-warning">Edit</a>
 
                         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
                             Delete
@@ -54,12 +52,12 @@
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header text-center">
-                                        <h1 class="modal-title fs-5" id="deleteModalLabel">Delete Server?</h1>
+                                        <h1 class="modal-title fs-5" id="deleteModalLabel">Delete IP Address?</h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <a href="/server/delete/{{ $data->slug }}" class="btn btn-danger">Yes</a>
+                                        <a href="/ip/delete/{{ $data->slug }}" class="btn btn-danger">Yes</a>
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Close</button>
                                     </div>
@@ -68,7 +66,7 @@
                         </div>
                     </td>
                 </tr>
-            @endforeach --}}
+            @endforeach
         </tbody>
     </table>
 @endsection

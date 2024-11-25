@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('ips', function (Blueprint $table) {
             $table->id();
             $table->string('ip_address', 15)->unique();
+            $table->string('slug')->unique();
             $table->string('tipe')->default('user');
             $table->foreignId('server_id')->constrained()->onDelete('cascade');
             $table->timestamps();

@@ -20,7 +20,7 @@
         <p>Connected IP Address :</p>
         <ul>
             @foreach ($ip_host as $ip)
-                <ul>{{ $ip->$ip_address }}</ul>
+                <li>{{ $ip->ip_address }}</li>
             @endforeach
         </ul>
     </div>
