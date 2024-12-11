@@ -51,6 +51,13 @@
                                 <a class="nav-link" href="/ip">IP Address</a>
                             @endif
                         </li>
+                        <li class="nav-item">
+                            @if (request()->is('*users*'))
+                                <a href="/users" class="btn btn-danger">User</a>
+                            @else
+                                <a class="nav-link" href="/users">User</a>
+                            @endif
+                        </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
@@ -73,10 +80,12 @@
                     <a href="/server" class="btn btn-outline-dark">
                         <i class="bi bi-box-arrow-left"></i> Back
                     </a>
-                @endif
-
-                @if (request()->is('ip/*'))
+                @elseif (request()->is('ip/*'))
                     <a href="/server" class="btn btn-outline-dark">
+                        <i class="bi bi-box-arrow-left"></i> Back
+                    </a>
+                @elseif (request()->is('users/*'))
+                    <a href="/users" class="btn btn-outline-dark">
                         <i class="bi bi-box-arrow-left"></i> Back
                     </a>
                 @endif

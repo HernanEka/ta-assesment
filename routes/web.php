@@ -29,4 +29,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/ip/edit/{slug}', [IpController::class, 'edit']);
     Route::post('/ip/update/{slug}', [IpController::class, 'update']);
     Route::get('/ip/delete/{slug}', [IpController::class, 'delete']);
+
+    Route::get('/users', [UserController::class, 'data']);
+    Route::get('/users/add', [UserController::class, 'add']);
+    Route::post('/users/tambah', [UserController::class, 'tambah']);
+    Route::get('/users/edit/{slug}', [UserController::class, 'edit']);
+    Route::post('/users/update/{slug}', [UserController::class, 'update']);
+    Route::get('/users/delete/{slug}', [UserController::class, 'delete']);
 });
