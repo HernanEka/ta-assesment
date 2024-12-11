@@ -31,16 +31,25 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mb-2 ms-auto mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link @if (request()->is('/')) active @endif" aria-current="page"
-                                href="/">Dashboard</a>
+                            @if (request()->is('/'))
+                                <a href="/" class="btn btn-danger">Dashboard</a>
+                            @else
+                                <a class="nav-link" aria-current="page" href="/">Dashboard</a>
+                            @endif
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link @if (request()->is('*server*')) active @endif"
-                                href="/server">Server</a>
+                            @if (request()->is('*server*'))
+                                <a href="/server" class="btn btn-danger">Server</a>
+                            @else
+                                <a class="nav-link" href="/server">Server</a>
+                            @endif
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link @if (request()->is('*ip*')) active @endif" href="/ip">Ip
-                                Address</a>
+                            @if (request()->is('*ip*'))
+                                <a href="/ip" class="btn btn-danger">IP Address</a>
+                            @else
+                                <a class="nav-link" href="/ip">IP Address</a>
+                            @endif
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"

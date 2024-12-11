@@ -22,7 +22,7 @@
         <p>Connected IP Address :</p>
         <ul>
             @foreach ($ip_host as $ip)
-                <li>
+                <li class="mb-3">
                     {{ $ip->ip_address }}
                     <a href="/ip/edit/{{ $ip->slug }}" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
