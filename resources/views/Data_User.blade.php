@@ -48,7 +48,9 @@
                     <td>
                         <a href="/users/edit/{{ $data->slug }}" class="btn btn-warning">Edit</a>
                         @if ($data->level != 1)
-                            <a href="/users/delete/{{ $data->slug }}" class="btn btn-danger">Delete</a>
+                            @if (auth()->user()->level == 1)
+                                <a href="/users/delete/{{ $data->slug }}" class="btn btn-danger">Delete</a>
+                            @endif
                         @endif
                     </td>
                 </tr>

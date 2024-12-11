@@ -42,9 +42,12 @@
                         <a href="/server/detail/{{ $data->server->slug }}" class="btn btn-primary">Detail</a>
                         <a href="/ip/edit/{{ $data->slug }}" class="btn btn-warning">Edit</a>
 
-                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                            Delete
-                        </button>
+                        @if (auth()->user()->level == 1)
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                data-bs-target="#deleteModal">
+                                Delete
+                            </button>
+                        @endif
 
                         <!-- Modal Delete -->
                         <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel"
