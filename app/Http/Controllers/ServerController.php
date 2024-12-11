@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ip;
+use App\Models\Riwayat;
 use App\Models\Server;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ServerController extends Controller
 {
@@ -63,6 +65,10 @@ class ServerController extends Controller
         $ip->server_id = $server->id;
         $ip->save();
 
+        $riwayat = new Riwayat();
+        $riwayat->riwayat = 'Admin <b>'. Auth::user()->name . '</b> menambahkan server baru dengan nama <b>' . $server->hostname . '</b> dengan IP host <b>' . $ip->ip_address .'</b>';
+        $riwayat->save();
+
         return redirect('/server');
     }
 
@@ -85,7 +91,6 @@ class ServerController extends Controller
         $title = 'Edit Server';
         $services = explode(", ", $server->services);
 
-        // return $services;
         return view('Edit_Server', compact('server', 'ip_server', 'title', 'services'));
     }
 
@@ -119,12 +124,20 @@ class ServerController extends Controller
         }
         $ip->save();
 
+        $riwayat = new Riwayat();
+        $riwayat->riwayat = 'Admin <b>'. Auth::user()->name . '</b> Melakukan perubahan pada <b>' . $server->hostname . '</b>';
+        $riwayat->save();
+
         return redirect('/server');
     }
 
     public function delete($slug){
 
         $server = Server::where('slug', '=', $slug)->first();
+
+        $riwayat = new Riwayat();
+        $riwayat->riwayat = 'Admin <b>'. Auth::user()->name . '</b> menghapus <b>' . $server->hostname . '</b>';
+        $riwayat->save();
 
         $server->delete();
 

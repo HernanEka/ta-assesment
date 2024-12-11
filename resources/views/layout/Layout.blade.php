@@ -58,6 +58,13 @@
                                 <a class="nav-link" href="/users">User</a>
                             @endif
                         </li>
+                        <li class="nav-item">
+                            @if (request()->is('*riwayat*'))
+                                <a href="/riwayat" class="btn btn-danger">Riwayat</a>
+                            @else
+                                <a class="nav-link" href="/riwayat">Riwayat</a>
+                            @endif
+                        </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">

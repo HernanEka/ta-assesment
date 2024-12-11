@@ -36,4 +36,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/users/edit/{slug}', [UserController::class, 'edit']);
     Route::post('/users/update/{slug}', [UserController::class, 'update']);
     Route::get('/users/delete/{slug}', [UserController::class, 'delete'])->middleware('admin');
+
+    Route::get('/riwayat', [DashboardController::class, 'riwayat']);
 });

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ip;
+use App\Models\Riwayat;
 use App\Models\Server;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class IpController extends Controller
 {
@@ -56,6 +58,12 @@ class IpController extends Controller
         $ip->server_id = $request->server_id;
         $ip->save();
 
+        $server = Server::find($request->server_id);
+
+        $riwayat = new Riwayat();
+        $riwayat->riwayat = 'Admin <b>'. Auth::user()->name . '</b> menambahkan IP <b>'. $ip->ip_address .'</b> pada server <b>'  . $server->hostname .  '</b>';
+        $riwayat->save();
+
         return redirect('/ip');
     }
 
@@ -82,10 +90,16 @@ class IpController extends Controller
 
         $ip = IP::where('slug', '=', $slug)->first();
 
+        $riwayat = new Riwayat();
+        $riwayat->riwayat = 'Admin <b>'. Auth::user()->name . '</b> melakukan perubahan pada IP <b>'. $ip->ip_address .'</b>';
+
         $ip->ip_address = $request->ip;
         $ip->server_id = $request->server_id;
 
         $ip->save();
+        $riwayat->save();
+
+
 
         return redirect('/ip');
     }

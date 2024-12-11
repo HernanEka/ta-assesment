@@ -12,7 +12,7 @@ class DashboardController extends Controller
     public function index(){
 
         $server = Server::all();
-        $ips = Ip::where('tipe','=','user')->get();
+        $ips = Ip::all();
         $title = 'Dashboard Telkom Server';
         return view('Dashboard', compact('title','server','ips'));
 
